@@ -132,12 +132,13 @@
 
 /* Leaflet overrides for dark theme */
 .leaflet-container {
-  background: hsl(270 10% 6%) !important;
+  background: hsl(270 10% 10%) !important;
   border-radius: 0.75rem;
+  z-index: 0;
 }
 
 .leaflet-tile-pane {
-  filter: brightness(0.7) contrast(1.2) saturate(0.8) hue-rotate(10deg);
+  filter: invert(1) hue-rotate(180deg) brightness(2.1) contrast(1.2);
 }
 
 .leaflet-control-zoom a {

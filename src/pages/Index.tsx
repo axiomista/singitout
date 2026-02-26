@@ -1,7 +1,8 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Mic2, Map, List } from "lucide-react";
-import { karaokeVenues, KaraokeVenue } from "@/data/karaokeData";
+import { KaraokeVenue } from "@/data/karaokeData";
+import { useVenues } from "@/hooks/useVenues";
 import SearchFilters from "@/components/SearchFilters";
 import KaraokeCard from "@/components/KaraokeCard";
 import KaraokeMap from "@/components/KaraokeMap";
@@ -10,6 +11,7 @@ import DiscoBall from "@/components/DiscoBall";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
+  const { venues, neighborhoods, locationTypes } = useVenues();
   const [searchQuery, setSearchQuery] = useState("");
   const [neighborhoodFilter, setNeighborhoodFilter] = useState("all");
   const [dayFilter, setDayFilter] = useState("all");
@@ -18,7 +20,7 @@ const Index = () => {
   const [showMap, setShowMap] = useState(true);
 
   const filteredVenues = useMemo(() => {
-    return karaokeVenues.filter((venue) => {
+    return venues.filter((venue) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
         !q ||
@@ -33,7 +35,7 @@ const Index = () => {
       const matchesType = typeFilter === "all" || venue.locationType === typeFilter;
       return matchesSearch && matchesNeighborhood && matchesDay && matchesType;
     });
-  }, [searchQuery, neighborhoodFilter, dayFilter, typeFilter]);
+  }, [venues, searchQuery, neighborhoodFilter, dayFilter, typeFilter]);
 
   const handleVenueClick = useCallback((venue: KaraokeVenue) => {
     setSelectedVenue(venue);
@@ -121,6 +123,8 @@ const Index = () => {
             onDayChange={setDayFilter}
             typeFilter={typeFilter}
             onTypeChange={setTypeFilter}
+            neighborhoods={neighborhoods}
+            locationTypes={locationTypes}
           />
         </motion.div>
 

@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { neighborhoods, days, locationTypes } from "@/data/karaokeData";
+import { days } from "@/data/karaokeData";
 
 interface SearchFiltersProps {
   searchQuery: string;
@@ -18,6 +18,8 @@ interface SearchFiltersProps {
   onDayChange: (value: string) => void;
   typeFilter: string;
   onTypeChange: (value: string) => void;
+  neighborhoods: string[];
+  locationTypes: string[];
 }
 
 const SearchFilters = ({
@@ -29,6 +31,8 @@ const SearchFilters = ({
   onDayChange,
   typeFilter,
   onTypeChange,
+  neighborhoods,
+  locationTypes,
 }: SearchFiltersProps) => {
   return (
     <div className="flex flex-col gap-3 md:flex-row md:items-center">
