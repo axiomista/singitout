@@ -1,68 +1,73 @@
-# Sing in Seattle
+# Welcome to your Lovable project
 
-A guide to karaoke nights across Seattle. Browse venues by neighborhood, day of the week, or vibe — on a map or as a list.
+## Project info
 
-## Tech stack
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-- **Frontend:** React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui
-- **Map:** Leaflet (inverted light tiles for dark-mode styling)
-- **Database:** Firebase Firestore (falls back to static data if unavailable)
+## How can I edit this code?
 
-## Getting started
+There are several ways of editing your application.
 
-```bash
-npm install
+**Use Lovable**
+
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+
+Changes made via Lovable will be committed automatically to this repo.
+
+**Use your preferred IDE**
+
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-### Other commands
+**Edit a file directly in GitHub**
 
-| Command | Description |
-|---------|-------------|
-| `npm run build` | Production build to `dist/` |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint |
-| `npm test` | Run tests (Vitest) |
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-## Data schema
+**Use GitHub Codespaces**
 
-Venues are stored in the Firestore `venues` collection. Each document has the following shape:
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-```ts
-{
-  place: string;             // Venue name
-  neighborhood: string;      // e.g. "Capitol Hill", "Fremont"
-  day: string;               // e.g. "Friday", "Every Day"
-  host: string;              // KJ / host name, or "Self-Service"
-  locationType: string;      // e.g. "Bar / Music Venue", "Private Room Karaoke"
-  showDescription: string;   // Free-text description of the karaoke night
-  lat: number;               // Latitude
-  lng: number;               // Longitude
-  address: string;           // Street address
-  photo: string;             // URL to venue photo (optional)
-  hostPhoto: string;         // URL to host photo (optional)
-  socialMedia: {
-    instagram?: string;
-    facebook?: string;
-    website?: string;
-    tiktok?: string;
-  };
-  hostSocialMedia: {
-    instagram?: string;
-    website?: string;
-  };
-  tags: string[];            // e.g. ["Live Band", "Open Mic", "Late Night"]
-}
-```
+## What technologies are used for this project?
 
-The document ID serves as the venue ID.
+This project is built with:
 
-## Seeding Firestore
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-To populate Firestore with the starter venue data:
+## How can I deploy this project?
 
-```bash
-npx tsx scripts/seed-firestore.ts
-```
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-This writes the venues defined in the seed script to the `venues` collection. It's safe to re-run — it overwrites documents by ID.
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
