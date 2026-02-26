@@ -54,7 +54,7 @@ const Index = () => {
                 height: Math.random() * 4 + 2,
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                background: `hsl(${290 + Math.random() * 60} ${60 + Math.random() * 20}% ${25 + Math.random() * 15}%)`,
+                background: `hsl(${280 + Math.random() * 70} ${50 + Math.random() * 25}% ${40 + Math.random() * 20}%)`,
                 animationDelay: `${Math.random() * 3}s`,
                 animationDuration: `${2 + Math.random() * 2}s`,
               }}

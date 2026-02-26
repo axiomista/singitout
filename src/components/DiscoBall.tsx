@@ -16,8 +16,8 @@ const DiscoBall = ({ size = 120 }: { size?: number }) => {
       <div
         className="relative w-full h-full rounded-full overflow-hidden animate-disco-rotate"
         style={{
-          background: "radial-gradient(circle at 35% 30%, hsl(0 0% 55%), hsl(0 0% 20%) 50%, hsl(0 0% 8%) 100%)",
-          boxShadow: "0 0 40px hsl(0 0% 40% / 0.2), inset 0 0 30px hsl(0 0% 0% / 0.5)",
+          background: "radial-gradient(circle at 35% 30%, hsl(0 0% 95%), hsl(0 0% 60%) 50%, hsl(0 0% 30%) 100%)",
+          boxShadow: "0 0 50px hsl(0 0% 80% / 0.3), inset 0 0 30px hsl(0 0% 0% / 0.3)",
         }}
       >
         {/* Tile grid */}
@@ -35,10 +35,10 @@ const DiscoBall = ({ size = 120 }: { size?: number }) => {
               const tileWidth = ((100 - 2 * margin) / cols) - 0.5;
               const tileHeight = (100 / rows) - 0.5;
               // Highlight variation for shimmer
-              const brightness = 20 + Math.random() * 45;
+              const brightness = 50 + Math.random() * 40;
               const highlightChance = Math.random();
-              const fill = highlightChance > 0.85
-                ? `hsl(0 0% ${70 + Math.random() * 25}%)`
+              const fill = highlightChance > 0.8
+                ? `hsl(0 0% ${85 + Math.random() * 15}%)`
                 : `hsl(0 0% ${brightness}%)`;
 
               return (
@@ -65,7 +65,7 @@ const DiscoBall = ({ size = 120 }: { size?: number }) => {
             height: "25%",
             top: "15%",
             left: "20%",
-            background: "radial-gradient(ellipse, hsl(0 0% 100% / 0.35), transparent 70%)",
+            background: "radial-gradient(ellipse, hsl(0 0% 100% / 0.6), transparent 70%)",
           }}
         />
       </div>
