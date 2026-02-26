@@ -1,63 +1,100 @@
 import { motion } from "framer-motion";
 
 const DiscoBall = ({ size = 120 }: { size?: number }) => {
-  const tiles: JSX.Element[] = [];
-  const rows = 8;
-  const cols = 12;
-
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const delay = (r * cols + c) * 0.05;
-      tiles.push(
-        <div
-          key={`${r}-${c}`}
-          className="absolute rounded-[1px]"
-          style={{
-            width: `${100 / cols}%`,
-            height: `${100 / rows}%`,
-            left: `${(c / cols) * 100}%`,
-            top: `${(r / rows) * 100}%`,
-            background: `linear-gradient(${(r + c) * 30}deg, 
-              hsl(330 85% ${55 + Math.random() * 20}% / ${0.3 + Math.random() * 0.4}),
-              hsl(280 60% ${50 + Math.random() * 20}% / ${0.2 + Math.random() * 0.3})
-            )`,
-            animationDelay: `${delay}s`,
-          }}
-        />
-      );
-    }
-  }
+  const rows = 10;
+  const tilesPerRow = [6, 10, 14, 16, 18, 18, 16, 14, 10, 6];
 
   return (
     <motion.div
-      className="relative animate-disco-rotate"
+      className="relative"
       style={{ width: size, height: size }}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
     >
+      {/* Main ball */}
       <div
-        className="relative w-full h-full rounded-full overflow-hidden border border-primary/30 shadow-disco"
+        className="relative w-full h-full rounded-full overflow-hidden animate-disco-rotate"
         style={{
-          background:
-            "radial-gradient(circle at 30% 30%, hsl(0 0% 30%), hsl(0 0% 10%))",
+          background: "radial-gradient(circle at 35% 30%, hsl(0 0% 55%), hsl(0 0% 20%) 50%, hsl(0 0% 8%) 100%)",
+          boxShadow: "0 0 40px hsl(0 0% 40% / 0.2), inset 0 0 30px hsl(0 0% 0% / 0.5)",
         }}
       >
-        {tiles}
+        {/* Tile grid */}
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
+          {tilesPerRow.map((cols, rowIdx) => {
+            const yStart = (rowIdx / rows) * 100;
+            const yEnd = ((rowIdx + 1) / rows) * 100;
+            const rowCenter = (yStart + yEnd) / 2;
+            // Curve the row width based on position (sphere illusion)
+            const rowWidthFactor = Math.sin((rowCenter / 100) * Math.PI);
+            const margin = (1 - rowWidthFactor) * 50;
+
+            return Array.from({ length: cols }).map((_, colIdx) => {
+              const xStart = margin + (colIdx / cols) * (100 - 2 * margin);
+              const tileWidth = ((100 - 2 * margin) / cols) - 0.5;
+              const tileHeight = (100 / rows) - 0.5;
+              // Highlight variation for shimmer
+              const brightness = 20 + Math.random() * 45;
+              const highlightChance = Math.random();
+              const fill = highlightChance > 0.85
+                ? `hsl(0 0% ${70 + Math.random() * 25}%)`
+                : `hsl(0 0% ${brightness}%)`;
+
+              return (
+                <rect
+                  key={`${rowIdx}-${colIdx}`}
+                  x={xStart}
+                  y={yStart}
+                  width={tileWidth}
+                  height={tileHeight}
+                  rx={0.3}
+                  fill={fill}
+                  opacity={0.6 + Math.random() * 0.4}
+                />
+              );
+            });
+          })}
+        </svg>
+
+        {/* Specular highlight */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: "35%",
+            height: "25%",
+            top: "15%",
+            left: "20%",
+            background: "radial-gradient(ellipse, hsl(0 0% 100% / 0.35), transparent 70%)",
+          }}
+        />
       </div>
-      {/* Light rays */}
-      {[...Array(6)].map((_, i) => (
+
+      {/* Hanging wire */}
+      <div
+        className="absolute left-1/2 -translate-x-1/2"
+        style={{
+          width: 1.5,
+          height: size * 0.3,
+          bottom: "100%",
+          background: "linear-gradient(to bottom, hsl(0 0% 30%), hsl(0 0% 50%))",
+        }}
+      />
+
+      {/* Ambient light reflections */}
+      {[...Array(8)].map((_, i) => (
         <div
           key={i}
-          className="absolute top-1/2 left-1/2 animate-sparkle"
+          className="absolute animate-sparkle"
           style={{
             width: 3,
             height: 3,
             borderRadius: "50%",
-            background: "hsl(330 85% 70%)",
-            boxShadow: "0 0 8px hsl(330 85% 55%), 0 0 16px hsl(280 60% 50%)",
-            transform: `translate(-50%, -50%) rotate(${i * 60}deg) translateX(${size * 0.7}px)`,
-            animationDelay: `${i * 0.3}s`,
+            background: `hsl(0 0% ${75 + Math.random() * 25}%)`,
+            boxShadow: `0 0 6px hsl(0 0% 80%), 0 0 12px hsl(0 0% 60% / 0.4)`,
+            top: `${50 + Math.cos((i / 8) * Math.PI * 2) * 55}%`,
+            left: `${50 + Math.sin((i / 8) * Math.PI * 2) * 55}%`,
+            animationDelay: `${i * 0.25}s`,
           }}
         />
       ))}
