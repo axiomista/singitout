@@ -16,9 +16,9 @@ const createIcon = (isSelected: boolean) =>
       width: ${isSelected ? 20 : 14}px;
       height: ${isSelected ? 20 : 14}px;
       border-radius: 50%;
-      background: ${isSelected ? "hsl(350 80% 35%)" : "hsl(240 70% 25%)"};
-      border: 2px solid ${isSelected ? "hsl(350 80% 50%)" : "hsl(240 70% 40%)"};
-      box-shadow: 0 0 ${isSelected ? 16 : 8}px ${isSelected ? "hsl(350 80% 35% / 0.6)" : "hsl(240 70% 25% / 0.4)"};
+      background: ${isSelected ? "hsl(350 75% 48%)" : "hsl(235 65% 40%)"};
+      border: 2px solid ${isSelected ? "hsl(350 75% 60%)" : "hsl(235 65% 55%)"};
+      box-shadow: 0 0 ${isSelected ? 16 : 8}px ${isSelected ? "hsl(350 75% 48% / 0.6)" : "hsl(235 65% 40% / 0.4)"};
       transition: all 0.3s;
     "></div>`,
     iconSize: [isSelected ? 20 : 14, isSelected ? 20 : 14],
