@@ -1,96 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 270 10% 6%;
+    --foreground: 300 10% 92%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 270 12% 10%;
+    --card-foreground: 300 10% 92%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 270 12% 10%;
+    --popover-foreground: 300 10% 92%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 330 85% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 280 60% 50%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 270 10% 15%;
+    --muted-foreground: 270 10% 55%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 280 60% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 270 15% 18%;
+    --input: 270 15% 18%;
+    --ring: 330 85% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    --glow-primary: 330 85% 55%;
+    --glow-secondary: 280 60% 50%;
+    --disco-gold: 45 90% 60%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background: 270 10% 8%;
+    --sidebar-foreground: 300 10% 92%;
+    --sidebar-primary: 330 85% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 280 60% 50%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 270 15% 18%;
+    --sidebar-ring: 330 85% 55%;
   }
 }
 
@@ -101,5 +58,102 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Outfit', sans-serif;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient-disco {
+    background: linear-gradient(135deg, hsl(330 85% 55%), hsl(280 60% 50%), hsl(330 85% 55%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-disco {
+    background: linear-gradient(135deg, hsl(330 85% 55% / 0.15), hsl(280 60% 50% / 0.15));
+  }
+
+  .border-glow {
+    border-color: hsl(330 85% 55% / 0.3);
+    box-shadow: 0 0 15px hsl(330 85% 55% / 0.1), inset 0 0 15px hsl(330 85% 55% / 0.05);
+  }
+
+  .shadow-disco {
+    box-shadow: 0 0 30px hsl(330 85% 55% / 0.15), 0 0 60px hsl(280 60% 50% / 0.1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(330 85% 55% / 0.5), 0 0 40px hsl(280 60% 50% / 0.3);
+  }
+}
+
+/* Disco ball sparkle animation */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes disco-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-disco-rotate {
+  animation: disco-rotate 20s linear infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Leaflet overrides for dark theme */
+.leaflet-container {
+  background: hsl(270 10% 6%) !important;
+  border-radius: 0.75rem;
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.7) contrast(1.2) saturate(0.8) hue-rotate(10deg);
+}
+
+.leaflet-control-zoom a {
+  background: hsl(270 12% 10%) !important;
+  color: hsl(300 10% 92%) !important;
+  border-color: hsl(270 15% 18%) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: hsl(270 12% 10%) !important;
+  color: hsl(300 10% 92%) !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid hsl(330 85% 55% / 0.3) !important;
+  box-shadow: 0 0 20px hsl(330 85% 55% / 0.15) !important;
+}
+
+.leaflet-popup-tip {
+  background: hsl(270 12% 10%) !important;
 }
