@@ -1,14 +1,23 @@
 import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Mic2, Map, List } from "lucide-react";
+import { Mic2, Map, List, ArrowUpDown } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
 import { useVenues } from "@/hooks/useVenues";
+import { useUserLocation, getDistanceMiles } from "@/hooks/useUserLocation";
 import SearchFilters from "@/components/SearchFilters";
 import KaraokeCard from "@/components/KaraokeCard";
 import KaraokeMap from "@/components/KaraokeMap";
 import VenueDetail from "@/components/VenueDetail";
 import DiscoBall from "@/components/DiscoBall";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+type SortOption = "distance" | "name" | "neighborhood" | "day";
 
 const Index = () => {
   const { venues, neighborhoods, locationTypes } = useVenues();
