@@ -39,8 +39,11 @@ const Index = () => {
   const [showMap, setShowMap] = useState(true);
   const [sortBy, setSortBy] = useState<SortOption>(userLocation ? "distance" : "name");
 
+  // Default to distance sort when location becomes available
+  const effectiveSortBy = sortBy === "distance" && !userLocation ? "name" : sortBy;
+
   const filteredVenues = useMemo(() => {
-    return venues.filter((venue) => {
+    const filtered = venues.filter((venue) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
       !q ||
@@ -55,7 +58,26 @@ const Index = () => {
       const matchesType = typeFilter === "all" || venue.locationType === typeFilter;
       return matchesSearch && matchesNeighborhood && matchesDay && matchesType;
     });
-  }, [venues, searchQuery, neighborhoodFilter, dayFilter, typeFilter]);
+
+    return [...filtered].sort((a, b) => {
+      switch (effectiveSortBy) {
+        case "distance":
+          if (!userLocation) return 0;
+          return (
+            getDistanceMiles(userLocation.lat, userLocation.lng, a.lat, a.lng) -
+            getDistanceMiles(userLocation.lat, userLocation.lng, b.lat, b.lng)
+          );
+        case "name":
+          return a.place.localeCompare(b.place);
+        case "neighborhood":
+          return a.neighborhood.localeCompare(b.neighborhood) || a.place.localeCompare(b.place);
+        case "day":
+          return DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day);
+        default:
+          return 0;
+      }
+    });
+  }, [venues, searchQuery, neighborhoodFilter, dayFilter, typeFilter, effectiveSortBy, userLocation]);
 
   const handleVenueClick = useCallback((venue: KaraokeVenue) => {
     setSelectedVenue(venue);
