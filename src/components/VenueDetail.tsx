@@ -103,6 +103,12 @@ const VenueDetail = ({ venue, onClose, distanceMiles }: VenueDetailProps) => {
             <p className="mt-3 text-sm text-muted-foreground flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-primary/60 shrink-0" />
               {venue.address}
+              {distanceMiles !== undefined && (
+                <span className="inline-flex items-center gap-1 ml-2 text-secondary">
+                  <Navigation className="h-3 w-3" />
+                  {distanceMiles.toFixed(1)} mi away
+                </span>
+              )}
             </p>
 
             <Separator className="my-4 bg-border" />
