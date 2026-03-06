@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Mic2, Map, List, ArrowUpDown } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
