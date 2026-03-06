@@ -19,6 +19,7 @@ import { Separator } from "@/components/ui/separator";
 interface VenueDetailProps {
   venue: KaraokeVenue | null;
   onClose: () => void;
+  distanceMiles?: number;
 }
 
 const SocialLink = ({
