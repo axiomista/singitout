@@ -34,6 +34,13 @@ const KaraokeCard = ({ venue, onClick, index, distanceMiles }: KaraokeCardProps)
         <span>{venue.neighborhood}</span>
         <span className="mx-1 text-border">·</span>
         <span>{venue.locationType}</span>
+        {distanceMiles !== undefined && (
+          <>
+            <span className="mx-1 text-border">·</span>
+            <Navigation className="h-3 w-3 text-secondary/70" />
+            <span className="text-secondary">{distanceMiles.toFixed(1)} mi</span>
+          </>
+        )}
       </div>
 
       <div className="flex items-center gap-1 text-sm text-muted-foreground mb-3">
