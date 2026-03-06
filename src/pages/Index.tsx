@@ -22,7 +22,7 @@ type SortOption = "distance" | "name" | "neighborhood" | "day";
 const DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Every Day"];
 
 const SORT_LABELS: Record<SortOption, string> = {
-  distance: "Nearest",
+  distance: "Distance from Me",
   name: "Name",
   neighborhood: "Neighborhood",
   day: "Day of Week",
