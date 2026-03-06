@@ -42,7 +42,7 @@ const SocialLink = ({
   </a>
 );
 
-const VenueDetail = ({ venue, onClose }: VenueDetailProps) => {
+const VenueDetail = ({ venue, onClose, distanceMiles }: VenueDetailProps) => {
   if (!venue) return null;
 
   return (
