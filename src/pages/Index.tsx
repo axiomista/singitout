@@ -19,14 +19,25 @@ import {
 
 type SortOption = "distance" | "name" | "neighborhood" | "day";
 
+const DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Every Day"];
+
+const SORT_LABELS: Record<SortOption, string> = {
+  distance: "Nearest",
+  name: "Name",
+  neighborhood: "Neighborhood",
+  day: "Day of Week",
+};
+
 const Index = () => {
   const { venues, neighborhoods, locationTypes } = useVenues();
+  const { location: userLocation } = useUserLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [neighborhoodFilter, setNeighborhoodFilter] = useState("all");
   const [dayFilter, setDayFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
   const [selectedVenue, setSelectedVenue] = useState<KaraokeVenue | null>(null);
   const [showMap, setShowMap] = useState(true);
+  const [sortBy, setSortBy] = useState<SortOption>(userLocation ? "distance" : "name");
 
   const filteredVenues = useMemo(() => {
     return venues.filter((venue) => {
