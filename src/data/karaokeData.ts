@@ -2,7 +2,7 @@ export interface KaraokeVenue {
   id: string;
   place: string;
   neighborhood: string;
-  day: string;
+  days: string[];
   host: string;
   locationType: string;
   showDescription: string;
@@ -29,7 +29,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "1",
     place: "The Crocodile",
     neighborhood: "Belltown",
-    day: "Friday",
+    days: ["Friday"],
     host: "DJ Sparkle Mike",
     locationType: "Bar / Music Venue",
     showDescription: "High-energy open mic karaoke with a live band backing. Song catalog of 10,000+ tracks. Sign up starts at 8pm, first singer at 9pm.",
@@ -52,7 +52,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "2",
     place: "Hula Hula",
     neighborhood: "Capitol Hill",
-    day: "Wednesday",
+    days: ["Wednesday"],
     host: "Karaoke Karen",
     locationType: "Tiki Bar",
     showDescription: "Tropical-themed karaoke night with themed cocktails. Costume contest every first Wednesday. Intimate stage with great sound system.",
@@ -75,7 +75,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "3",
     place: "ReBar",
     neighborhood: "Capitol Hill",
-    day: "Saturday",
+    days: ["Saturday"],
     host: "Sylvia O'Stayformore",
     locationType: "Nightclub",
     showDescription: "Drag-hosted karaoke extravaganza! Duets encouraged, group songs welcome. Prizes for best performance every week.",
@@ -98,7 +98,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "4",
     place: "Ozzie's",
     neighborhood: "Queen Anne",
-    day: "Thursday",
+    days: ["Thursday"],
     host: "Tommy Tune",
     locationType: "Sports Bar",
     showDescription: "Chill karaoke with a sports bar vibe. Great wings, cheap pitchers, and a surprisingly deep song catalog. No judgment zone!",
@@ -120,7 +120,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "5",
     place: "Rock Box",
     neighborhood: "International District",
-    day: "Every Day",
+    days: ["Every Day"],
     host: "Self-Service",
     locationType: "Private Room Karaoke",
     showDescription: "Japanese-style private karaoke rooms. Book by the hour. Full food and drink menu delivered to your room. 20+ rooms available.",
@@ -142,7 +142,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "6",
     place: "Nega Karaoke",
     neighborhood: "International District",
-    day: "Every Day",
+    days: ["Every Day"],
     host: "Self-Service",
     locationType: "Private Room Karaoke",
     showDescription: "K-pop focused karaoke with an incredible Korean song selection. Modern rooms with disco lights, tambourines provided!",
@@ -161,7 +161,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "7",
     place: "Dunagan's",
     neighborhood: "Fremont",
-    day: "Tuesday",
+    days: ["Tuesday"],
     host: "Melody Martinez",
     locationType: "Irish Pub",
     showDescription: "Karaoke in a cozy Irish pub setting. Strong pours, warm vibes. Tuesday is the hidden gem night — locals only know about this one.",
@@ -182,7 +182,7 @@ export const karaokeVenues: KaraokeVenue[] = [
     id: "8",
     place: "Garage",
     neighborhood: "Capitol Hill",
-    day: "Monday",
+    days: ["Monday"],
     host: "Reverb Rachel",
     locationType: "Bar & Bowling",
     showDescription: "Monday night karaoke + bowling! Sing between frames. Two floors of fun. The most unique karaoke experience in Seattle.",

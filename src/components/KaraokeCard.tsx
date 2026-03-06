@@ -25,7 +25,7 @@ const KaraokeCard = ({ venue, onClick, index, distanceMiles }: KaraokeCardProps)
           {venue.place}
         </h3>
         <Badge variant="outline" className="border-primary/40 text-primary text-xs shrink-0 ml-2">
-          {venue.day}
+          {venue.days.join(" · ")}
         </Badge>
       </div>
 

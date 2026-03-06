@@ -88,7 +88,7 @@ const VenueDetail = ({ venue, onClose, distanceMiles }: VenueDetailProps) => {
             <div className="mt-3 flex flex-wrap gap-2">
               <Badge variant="outline" className="border-primary/40 text-primary">
                 <Calendar className="h-3 w-3 mr-1" />
-                {venue.day}
+                {venue.days.join(" · ")}
               </Badge>
               <Badge variant="outline" className="border-secondary/40 text-secondary">
                 <MapPin className="h-3 w-3 mr-1" />
@@ -104,10 +104,21 @@ const VenueDetail = ({ venue, onClose, distanceMiles }: VenueDetailProps) => {
               <MapPin className="h-4 w-4 text-primary/60 shrink-0" />
               {venue.address}
               {distanceMiles !== undefined && (
-                <span className="inline-flex items-center gap-1 ml-2 text-secondary">
-                  <Navigation className="h-3 w-3" />
-                  {distanceMiles.toFixed(1)} mi away
-                </span>
+                <>
+                  <span className="inline-flex items-center gap-1 ml-2 text-secondary">
+                    <Navigation className="h-3 w-3" />
+                    {distanceMiles.toFixed(1)} mi away
+                  </span>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${venue.lat},${venue.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 ml-2 text-xs text-secondary hover:underline"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                    Directions
+                  </a>
+                </>
               )}
             </p>
 

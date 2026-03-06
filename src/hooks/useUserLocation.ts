@@ -15,16 +15,18 @@ export function useUserLocation() {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(
+    const watchId = navigator.geolocation.watchPosition(
       (pos) => {
         setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
         setLoading(false);
       },
-      () => {
+      (err) => {
+        console.warn("Geolocation error:", err.code, err.message);
         setLoading(false);
-      },
-      { timeout: 5000 }
+      }
     );
+
+    return () => navigator.geolocation.clearWatch(watchId);
   }, []);
 
   return { location, loading };

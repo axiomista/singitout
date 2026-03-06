@@ -61,7 +61,7 @@ const Index = () => {
       venue.tags.some((t) => t.toLowerCase().includes(q));
       const matchesNeighborhood =
       neighborhoodFilter === "all" || venue.neighborhood === neighborhoodFilter;
-      const matchesDay = dayFilter === "all" || venue.day === dayFilter;
+      const matchesDay = dayFilter === "all" || venue.days.includes(dayFilter) || venue.days.includes("Every Day");
       const matchesType = typeFilter === "all" || venue.locationType === typeFilter;
       return matchesSearch && matchesNeighborhood && matchesDay && matchesType;
     });
@@ -79,7 +79,10 @@ const Index = () => {
         case "neighborhood":
           return a.neighborhood.localeCompare(b.neighborhood) || a.place.localeCompare(b.place);
         case "day":
-          return DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day);
+          return (
+            Math.min(...a.days.map((d) => DAY_ORDER.indexOf(d))) -
+            Math.min(...b.days.map((d) => DAY_ORDER.indexOf(d)))
+          );
         default:
           return 0;
       }

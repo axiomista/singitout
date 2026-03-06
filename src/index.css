@@ -18,7 +18,7 @@
     --primary: 350 75% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 235 65% 40%;
+    --secondary: 235 65% 65%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 260 12% 18%;
@@ -37,7 +37,7 @@
     --radius: 0.75rem;
 
     --glow-primary: 350 75% 48%;
-    --glow-secondary: 235 65% 40%;
+    --glow-secondary: 235 65% 65%;
     --disco-gold: 45 90% 60%;
 
     --sidebar-background: 270 10% 8%;
@@ -68,27 +68,27 @@
 
 @layer utilities {
   .text-gradient-disco {
-    background: linear-gradient(135deg, hsl(350 75% 48%), hsl(285 50% 40%), hsl(235 65% 40%));
+    background: linear-gradient(135deg, hsl(350 75% 48%), hsl(285 50% 40%), hsl(235 65% 65%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .bg-gradient-disco {
-    background: linear-gradient(135deg, hsl(350 75% 48% / 0.15), hsl(235 65% 40% / 0.15));
+    background: linear-gradient(135deg, hsl(350 75% 48% / 0.15), hsl(235 65% 65% / 0.15));
   }
 
   .border-glow {
     border-color: hsl(285 50% 40% / 0.4);
-    box-shadow: 0 0 15px hsl(350 75% 48% / 0.1), inset 0 0 15px hsl(235 65% 40% / 0.05);
+    box-shadow: 0 0 15px hsl(350 75% 48% / 0.1), inset 0 0 15px hsl(235 65% 65% / 0.05);
   }
 
   .shadow-disco {
-    box-shadow: 0 0 30px hsl(350 75% 48% / 0.15), 0 0 60px hsl(235 65% 40% / 0.1);
+    box-shadow: 0 0 30px hsl(350 75% 48% / 0.15), 0 0 60px hsl(235 65% 65% / 0.1);
   }
 
   .glow-text {
-    text-shadow: 0 0 20px hsl(350 75% 48% / 0.6), 0 0 40px hsl(235 65% 40% / 0.3);
+    text-shadow: 0 0 20px hsl(350 75% 48% / 0.6), 0 0 40px hsl(235 65% 65% / 0.3);
   }
 }
 
