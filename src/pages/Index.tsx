@@ -272,7 +272,7 @@ const Index = () => {
 
       {/* Venue detail modal */}
       {selectedVenue &&
-      <VenueDetail venue={selectedVenue} onClose={() => setSelectedVenue(null)} />
+      <VenueDetail venue={selectedVenue} onClose={() => setSelectedVenue(null)} distanceMiles={userLocation ? getDistanceMiles(userLocation.lat, userLocation.lng, selectedVenue.lat, selectedVenue.lng) : undefined} />
       }
     </div>);
 

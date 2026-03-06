@@ -9,6 +9,7 @@ import {
   Globe,
   ExternalLink,
   Tag,
+  Navigation,
 } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,7 @@ import { Separator } from "@/components/ui/separator";
 interface VenueDetailProps {
   venue: KaraokeVenue | null;
   onClose: () => void;
+  distanceMiles?: number;
 }
 
 const SocialLink = ({
@@ -40,7 +42,7 @@ const SocialLink = ({
   </a>
 );
 
-const VenueDetail = ({ venue, onClose }: VenueDetailProps) => {
+const VenueDetail = ({ venue, onClose, distanceMiles }: VenueDetailProps) => {
   if (!venue) return null;
 
   return (
@@ -101,6 +103,12 @@ const VenueDetail = ({ venue, onClose }: VenueDetailProps) => {
             <p className="mt-3 text-sm text-muted-foreground flex items-center gap-1.5">
               <MapPin className="h-4 w-4 text-primary/60 shrink-0" />
               {venue.address}
+              {distanceMiles !== undefined && (
+                <span className="inline-flex items-center gap-1 ml-2 text-secondary">
+                  <Navigation className="h-3 w-3" />
+                  {distanceMiles.toFixed(1)} mi away
+                </span>
+              )}
             </p>
 
             <Separator className="my-4 bg-border" />
