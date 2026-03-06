@@ -1,26 +1,56 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Mic2, Map, List } from "lucide-react";
+import { Mic2, Map, List, ArrowUpDown } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
 import { useVenues } from "@/hooks/useVenues";
+import { useUserLocation, getDistanceMiles } from "@/hooks/useUserLocation";
 import SearchFilters from "@/components/SearchFilters";
 import KaraokeCard from "@/components/KaraokeCard";
 import KaraokeMap from "@/components/KaraokeMap";
 import VenueDetail from "@/components/VenueDetail";
 import DiscoBall from "@/components/DiscoBall";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+type SortOption = "distance" | "name" | "neighborhood" | "day";
+
+const DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Every Day"];
+
+const SORT_LABELS: Record<SortOption, string> = {
+  distance: "Nearest",
+  name: "Name",
+  neighborhood: "Neighborhood",
+  day: "Day of Week",
+};
 
 const Index = () => {
   const { venues, neighborhoods, locationTypes } = useVenues();
+  const { location: userLocation } = useUserLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [neighborhoodFilter, setNeighborhoodFilter] = useState("all");
   const [dayFilter, setDayFilter] = useState("all");
   const [typeFilter, setTypeFilter] = useState("all");
   const [selectedVenue, setSelectedVenue] = useState<KaraokeVenue | null>(null);
   const [showMap, setShowMap] = useState(true);
+  const [sortBy, setSortBy] = useState<SortOption>("name");
+  const hasAutoSorted = useRef(false);
+  useEffect(() => {
+    if (userLocation && !hasAutoSorted.current) {
+      setSortBy("distance");
+      hasAutoSorted.current = true;
+    }
+  }, [userLocation]);
+
+  // Default to distance sort when location becomes available
+  const effectiveSortBy = sortBy === "distance" && !userLocation ? "name" : sortBy;
 
   const filteredVenues = useMemo(() => {
-    return venues.filter((venue) => {
+    const filtered = venues.filter((venue) => {
       const q = searchQuery.toLowerCase();
       const matchesSearch =
       !q ||
@@ -35,7 +65,26 @@ const Index = () => {
       const matchesType = typeFilter === "all" || venue.locationType === typeFilter;
       return matchesSearch && matchesNeighborhood && matchesDay && matchesType;
     });
-  }, [venues, searchQuery, neighborhoodFilter, dayFilter, typeFilter]);
+
+    return [...filtered].sort((a, b) => {
+      switch (effectiveSortBy) {
+        case "distance":
+          if (!userLocation) return 0;
+          return (
+            getDistanceMiles(userLocation.lat, userLocation.lng, a.lat, a.lng) -
+            getDistanceMiles(userLocation.lat, userLocation.lng, b.lat, b.lng)
+          );
+        case "name":
+          return a.place.localeCompare(b.place);
+        case "neighborhood":
+          return a.neighborhood.localeCompare(b.neighborhood) || a.place.localeCompare(b.place);
+        case "day":
+          return DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day);
+        default:
+          return 0;
+      }
+    });
+  }, [venues, searchQuery, neighborhoodFilter, dayFilter, typeFilter, effectiveSortBy, userLocation]);
 
   const handleVenueClick = useCallback((venue: KaraokeVenue) => {
     setSelectedVenue(venue);
@@ -130,10 +179,36 @@ const Index = () => {
 
         {/* Toggle + count */}
         <div className="mt-4 flex items-center justify-between">
-          <p className="text-muted-foreground text-2xl">
-            <span className="text-primary font-semibold">{filteredVenues.length}</span>{" "}
-            {filteredVenues.length === 1 ? "venue" : "venues"} found
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-muted-foreground text-2xl">
+              <span className="text-primary font-semibold">{filteredVenues.length}</span>{" "}
+              {filteredVenues.length === 1 ? "venue" : "venues"} found
+            </p>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-muted-foreground text-xs gap-1">
+                  <ArrowUpDown className="h-3 w-3" />
+                  {SORT_LABELS[effectiveSortBy]}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="bg-card border-glow">
+                {userLocation && (
+                  <DropdownMenuItem onClick={() => setSortBy("distance")} className={effectiveSortBy === "distance" ? "text-primary" : ""}>
+                    Nearest
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem onClick={() => setSortBy("name")} className={effectiveSortBy === "name" ? "text-primary" : ""}>
+                  Name
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("neighborhood")} className={effectiveSortBy === "neighborhood" ? "text-primary" : ""}>
+                  Neighborhood
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("day")} className={effectiveSortBy === "day" ? "text-primary" : ""}>
+                  Day of Week
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <div className="flex gap-1">
             <Button
               variant={showMap ? "default" : "ghost"}
