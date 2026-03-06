@@ -10,7 +10,7 @@ interface KaraokeCardProps {
   distanceMiles?: number;
 }
 
-const KaraokeCard = ({ venue, onClick, index }: KaraokeCardProps) => {
+const KaraokeCard = ({ venue, onClick, index, distanceMiles }: KaraokeCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
