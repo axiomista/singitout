@@ -37,7 +37,7 @@ const Index = () => {
   const [typeFilter, setTypeFilter] = useState("all");
   const [selectedVenue, setSelectedVenue] = useState<KaraokeVenue | null>(null);
   const [showMap, setShowMap] = useState(true);
-  const [sortBy, setSortBy] = useState<SortOption>(userLocation ? "distance" : "name");
+  const [sortBy, setSortBy] = useState<SortOption>("name");
 
   // Default to distance sort when location becomes available
   const effectiveSortBy = sortBy === "distance" && !userLocation ? "name" : sortBy;
