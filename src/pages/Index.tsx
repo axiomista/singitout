@@ -172,10 +172,36 @@ const Index = () => {
 
         {/* Toggle + count */}
         <div className="mt-4 flex items-center justify-between">
-          <p className="text-muted-foreground text-2xl">
-            <span className="text-primary font-semibold">{filteredVenues.length}</span>{" "}
-            {filteredVenues.length === 1 ? "venue" : "venues"} found
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-muted-foreground text-2xl">
+              <span className="text-primary font-semibold">{filteredVenues.length}</span>{" "}
+              {filteredVenues.length === 1 ? "venue" : "venues"} found
+            </p>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-muted-foreground text-xs gap-1">
+                  <ArrowUpDown className="h-3 w-3" />
+                  {SORT_LABELS[effectiveSortBy]}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="bg-card border-glow">
+                {userLocation && (
+                  <DropdownMenuItem onClick={() => setSortBy("distance")} className={effectiveSortBy === "distance" ? "text-primary" : ""}>
+                    Nearest
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem onClick={() => setSortBy("name")} className={effectiveSortBy === "name" ? "text-primary" : ""}>
+                  Name
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("neighborhood")} className={effectiveSortBy === "neighborhood" ? "text-primary" : ""}>
+                  Neighborhood
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("day")} className={effectiveSortBy === "day" ? "text-primary" : ""}>
+                  Day of Week
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <div className="flex gap-1">
             <Button
               variant={showMap ? "default" : "ghost"}
