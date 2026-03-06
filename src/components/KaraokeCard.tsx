@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Mic2, Tag } from "lucide-react";
+import { MapPin, Calendar, Mic2, Tag, Navigation } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
 import { Badge } from "@/components/ui/badge";
 
@@ -7,6 +7,7 @@ interface KaraokeCardProps {
   venue: KaraokeVenue;
   onClick: (venue: KaraokeVenue) => void;
   index: number;
+  distanceMiles?: number;
 }
 
 const KaraokeCard = ({ venue, onClick, index }: KaraokeCardProps) => {
