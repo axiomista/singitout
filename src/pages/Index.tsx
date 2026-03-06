@@ -22,7 +22,7 @@ type SortOption = "distance" | "name" | "neighborhood" | "day";
 const DAY_ORDER = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Every Day"];
 
 const SORT_LABELS: Record<SortOption, string> = {
-  distance: "Nearest",
+  distance: "Distance from Me",
   name: "Name",
   neighborhood: "Neighborhood",
   day: "Day of Week",
@@ -192,11 +192,12 @@ const Index = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="bg-card border-glow">
-                {userLocation && (
-                  <DropdownMenuItem onClick={() => setSortBy("distance")} className={effectiveSortBy === "distance" ? "text-primary" : ""}>
-                    Nearest
-                  </DropdownMenuItem>
-                )}
+                <DropdownMenuItem
+                  onClick={() => userLocation && setSortBy("distance")}
+                  className={effectiveSortBy === "distance" ? "text-primary" : !userLocation ? "text-muted-foreground/50 cursor-not-allowed" : ""}
+                >
+                  Distance from Me{!userLocation && " (allow location)"}
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => setSortBy("name")} className={effectiveSortBy === "name" ? "text-primary" : ""}>
                   Name
                 </DropdownMenuItem>
