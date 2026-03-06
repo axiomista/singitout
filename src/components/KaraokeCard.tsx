@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Mic2, Tag } from "lucide-react";
+import { MapPin, Calendar, Mic2, Tag, Navigation } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
 import { Badge } from "@/components/ui/badge";
 
@@ -7,9 +7,10 @@ interface KaraokeCardProps {
   venue: KaraokeVenue;
   onClick: (venue: KaraokeVenue) => void;
   index: number;
+  distanceMiles?: number;
 }
 
-const KaraokeCard = ({ venue, onClick, index }: KaraokeCardProps) => {
+const KaraokeCard = ({ venue, onClick, index, distanceMiles }: KaraokeCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -33,6 +34,13 @@ const KaraokeCard = ({ venue, onClick, index }: KaraokeCardProps) => {
         <span>{venue.neighborhood}</span>
         <span className="mx-1 text-border">·</span>
         <span>{venue.locationType}</span>
+        {distanceMiles !== undefined && (
+          <>
+            <span className="mx-1 text-border">·</span>
+            <Navigation className="h-3 w-3 text-secondary/70" />
+            <span className="text-secondary">{distanceMiles.toFixed(1)} mi</span>
+          </>
+        )}
       </div>
 
       <div className="flex items-center gap-1 text-sm text-muted-foreground mb-3">

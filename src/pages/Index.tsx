@@ -254,7 +254,8 @@ const Index = () => {
             key={venue.id}
             venue={venue}
             onClick={handleVenueClick}
-            index={i} />
+            index={i}
+            distanceMiles={userLocation ? getDistanceMiles(userLocation.lat, userLocation.lng, venue.lat, venue.lng) : undefined} />
 
           )}
         </div>
