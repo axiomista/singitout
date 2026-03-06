@@ -9,6 +9,7 @@ import {
   Globe,
   ExternalLink,
   Tag,
+  Navigation,
 } from "lucide-react";
 import { KaraokeVenue } from "@/data/karaokeData";
 import { Badge } from "@/components/ui/badge";
